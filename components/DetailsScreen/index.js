@@ -15,7 +15,7 @@ export default class DetailsScreen extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://api.oppyfinder.com/api/latest/places/${this.props.id}?token=d41d8cd98f00b204e9800998ecf8427e`)
+    axios.get(`https://api.oppyfinder.com/api/latest/places/${this.props.id}?token=d41d8cd98f00b204e9800998ecf8427e`)
       .then(res => {
         const place = res.data.data;
         this.setState({ place: place, loaded: true });
@@ -72,6 +72,9 @@ class DetailsInfo extends React.Component {
     return(
       <View style={styles.tabContent}>
         <Text style={styles.tabText}>{place.name}</Text>
+        <Text style={styles.tabText}>{place['details']['formatted-address']}</Text>
+        <Text style={styles.tabText}>{place['details']['opening-hours']['weekday-text'].join(',')}</Text>
+        <Text style={styles.tabText}>Number of Reviews: { place['details']['reviews'].length}</Text>
       </View>
     );
   }
