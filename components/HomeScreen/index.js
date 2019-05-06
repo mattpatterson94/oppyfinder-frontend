@@ -16,7 +16,7 @@ export default class HomeScreen extends React.Component {
   _keyExtractor = (item, index) => {item.id};
 
   componentDidMount() {
-    axios.get(`http://api.oppyfinder.com/api/latest/places?token=d41d8cd98f00b204e9800998ecf8427e`)
+    axios.get(`https://api.oppyfinder.com/api/latest/places?token=d41d8cd98f00b204e9800998ecf8427e`)
       .then(res => {
         const places = res.data.data;
         this.setState({ places });
@@ -35,20 +35,18 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <List>
-          <FlatList
-            keyExtractor={item => item.id}
-            data={this.state.places}
-            renderItem={
-              ({item}) => (
-                <ListItem
-                  onPress={() => this._onForward(item.id)}
-                  title={item.attributes.name}
+        <FlatList
+          keyExtractor={item => item.id}
+          data={this.state.places}
+          renderItem={
+            ({ item }) => (
+              <ListItem
+                onPress={() => this._onForward(item.id)}
+                title={item.attributes.name}
               />
-              )
-            }
-          />
-        </List>
+            )
+          }
+        />
       </View>
     );
   }
